@@ -1,14 +1,8 @@
-﻿[cite\_start]Aqui está o **README.md** completo e formatado profissionalmente, atendendo a todos os requisitos do PDF [cite: 67, 103] e refletindo exatamente o código que construímos (C\# .NET 9, Oracle, Versionamento).
-
-Você pode copiar o conteúdo abaixo e salvar num arquivo chamado `README.md` na raiz da sua solução.
-
------
-
-# 🚀 SkillBridge API - Global Solution 2025
+﻿# SkillBridge API
 
 > **Tema:** O Futuro do Trabalho - Upskilling & Reskilling para 2030+
 
-## 📋 Descrição do Projeto
+## Descrição do Projeto
 
 A **SkillBridge** é uma API RESTful desenvolvida para gerenciar uma plataforma de educação continuada. [cite\_start]No contexto de transformação digital impulsionada por IA e automação, nossa solução visa facilitar o **Reskilling** (requalificação) e **Upskilling** (aperfeiçoamento) de profissionais[cite: 8, 10, 11].
 
@@ -22,7 +16,7 @@ A API permite o gerenciamento de **Trilhas de Aprendizagem** focadas em competê
 
 -----
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
   * [cite\_start]**Linguagem:** C\# (Platforma .NET 9) [cite: 136, 142]
   * **Framework:** ASP.NET Core Web API
@@ -34,7 +28,7 @@ A API permite o gerenciamento de **Trilhas de Aprendizagem** focadas em competê
 
 -----
 
-## ⚙️ Configuração e Execução
+## Configuração e Execução
 
 ### 1\. Pré-requisitos
 
@@ -87,7 +81,7 @@ A aplicação iniciará (geralmente em `http://localhost:5006` ou porta similar)
 
 -----
 
-## 🔌 Documentação da API (Endpoints)
+## Documentação da API (Endpoints)
 
 A API utiliza versionamento. A base da URL é: `/api/v1/`.
 
@@ -115,7 +109,7 @@ A API utiliza versionamento. A base da URL é: `/api/v1/`.
   * **DELETE** `/api/v1/trilhas/{id}`
       * Remove uma trilha.
 
-### 👤 Recurso: Usuários (`/api/v1/usuarios`)
+### Recurso: Usuários (`/api/v1/usuarios`)
 
   * **GET** `/api/v1/usuarios`
       * Lista todos os usuários.
@@ -134,7 +128,7 @@ A API utiliza versionamento. A base da URL é: `/api/v1/`.
 
 -----
 
-## 🧪 Como Testar
+## Como Testar
 
 ### Opção 1: Swagger (Recomendado)
 
@@ -157,7 +151,7 @@ Abra o arquivo `index.html` localizado na raiz (ou pasta específica) no seu nav
 
 -----
 
-## 🏗️ Estrutura do Projeto (Arquitetura)
+## Estrutura do Projeto (Arquitetura)
 
 O projeto segue uma arquitetura em camadas para garantir a separação de responsabilidades e fácil manutenção:
 
@@ -168,7 +162,7 @@ O projeto segue uma arquitetura em camadas para garantir a separação de respon
 
 -----
 
-## 👨‍💻 Autores
+## Integrantes do Grupo
 
   * Márcio Gastaldi - RM98811
   * Arthur Bessa Pian - RM99215
