@@ -6,8 +6,8 @@ using Asp.Versioning;
 namespace SkillBridge.Api.Controllers
 {
     [ApiController]
-    [ApiVersion("1.0")] // <--- Adicione isso
-    [Route("api/v{version:apiVersion}/[controller]")] // <--- Mude a rota para isso
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class UsuariosController : ControllerBase
     {
         private readonly IUsuarioService _service;

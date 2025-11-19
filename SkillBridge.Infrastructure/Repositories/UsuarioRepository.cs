@@ -5,7 +5,6 @@ using SkillBridge.Infrastructure.Data;
 
 namespace SkillBridge.Infrastructure.Repositories
 {
-    // Aqui definimos a CLASSE (class) que implementa a INTERFACE (: IUsuarioRepository)
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly AppDbContext _context;
@@ -25,7 +24,6 @@ namespace SkillBridge.Infrastructure.Repositories
             return await _context.Usuarios.FindAsync(id);
         }
 
-        // Implementação do método extra que adicionamos para validar email único
         public async Task<Usuario?> GetByEmailAsync(string email)
         {
             return await _context.Usuarios

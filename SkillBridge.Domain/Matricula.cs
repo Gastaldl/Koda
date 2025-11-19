@@ -18,7 +18,6 @@ namespace SkillBridge.Domain
         [StringLength(50)]
         public string Status { get; set; } // Ex: ATIVA, CONCLUIDA, CANCELADA [cite: 208, 209, 212]
 
-        // Propriedades de Navegação
         public virtual Usuario Usuario { get; set; }
         public virtual Trilha Trilha { get; set; }
     }

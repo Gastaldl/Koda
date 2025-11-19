@@ -6,7 +6,7 @@ namespace SkillBridge.Domain.Interfaces
     {
         Task<IEnumerable<Usuario>> GetAllAsync();
         Task<Usuario?> GetByIdAsync(long id);
-        Task<Usuario?> GetByEmailAsync(string email); // Novo método útil
+        Task<Usuario?> GetByEmailAsync(string email);
         Task<Usuario> AddAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(long id);

@@ -24,14 +24,11 @@ namespace SkillBridge.Application.Services
 
         public async Task<Usuario> CadastrarUsuario(Usuario usuario)
         {
-            // Regra de Negócio: Verificar email único
             var existente = await _repository.GetByEmailAsync(usuario.Email);
             if (existente != null)
             {
                 throw new ArgumentException("Já existe um usuário cadastrado com este e-mail.");
             }
-
-            // Define data de cadastro se não vier preenchida
             if (usuario.DataCadastro == default)
             {
                 usuario.DataCadastro = DateTime.Now;
@@ -45,12 +42,10 @@ namespace SkillBridge.Application.Services
             if (id != usuario.Id)
                 throw new ArgumentException("ID da rota não confere com o ID do usuário.");
 
-            // Verifica se o usuário existe antes de atualizar
             var usuarioExistente = await _repository.GetByIdAsync(id);
             if (usuarioExistente == null)
                 throw new KeyNotFoundException("Usuário não encontrado.");
 
-            // Atualiza campos permitidos (preservando data de cadastro, por exemplo)
             usuarioExistente.Nome = usuario.Nome;
             usuarioExistente.Email = usuario.Email;
             usuarioExistente.AreaAtuacao = usuario.AreaAtuacao;
