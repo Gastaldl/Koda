@@ -4,7 +4,7 @@
 
 ## Descrição do Projeto
 
-A **SkillBridge** é uma API RESTful desenvolvida para gerenciar uma plataforma de educação continuada. No contexto de transformação digital impulsionada por IA e automação, nossa solução visa facilitar o **Reskilling** (requalificação) e **Upskilling** (aperfeiçoamento) de profissionais[cite: 8, 10, 11].
+A **SkillBridge** é uma API RESTful desenvolvida para gerenciar uma plataforma de educação continuada. No contexto de transformação digital impulsionada por IA e automação, nossa solução visa facilitar o **Reskilling** (requalificação) e **Upskilling** (aperfeiçoamento) de profissionais.
 
 A API permite o gerenciamento de **Trilhas de Aprendizagem** focadas em competências do futuro (como IA Generativa, ESG e Soft Skills) e o cadastro de **Usuários** que buscam se preparar para o mercado de trabalho de 2030.
 
