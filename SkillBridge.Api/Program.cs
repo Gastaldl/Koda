@@ -59,7 +59,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "SkillBridge API",
+        Title = "Koda API",
         Version = "v1",
         Description = "API para plataforma de Upskilling/Reskilling."
     });
@@ -69,11 +69,7 @@ var app = builder.Build();
 
 // 4. Pipeline
 app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SkillBridge API v1");
-    c.RoutePrefix = "swagger";
-});
+app.UseSwaggerUI();
 
 app.UseCors("AllowAll");
 
