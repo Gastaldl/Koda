@@ -1,169 +1,191 @@
-﻿# Koda API
+# Koda API
 
 > **Tema:** O Futuro do Trabalho - Upskilling & Reskilling para 2030+
 
-## Descrição do Projeto
+## Descrição do Problema e Solução
 
-A **Koda** é uma API RESTful desenvolvida para gerenciar uma plataforma de educação continuada. No contexto de transformação digital impulsionada por IA e automação, nossa solução visa facilitar o **Reskilling** (requalificação) e **Upskilling** (aperfeiçoamento) de profissionais.
+### O Problema
+O mercado de trabalho enfrenta uma transformação acelerada impulsionada por IA e automação. Profissionais correm o risco de obsolescência de suas funções atuais, enquanto empresas sofrem com a escassez de talentos qualificados nas competências do futuro (Tech, Dados, ESG).
 
-A API permite o gerenciamento de **Trilhas de Aprendizagem** focadas em competências do futuro (como IA Generativa, ESG e Soft Skills) e o cadastro de **Usuários** que buscam se preparar para o mercado de trabalho de 2030.
+### A Solução Proposta (Koda)
+A **Koda** é uma API RESTful projetada para ser o motor de plataformas de educação continuada. Ela gerencia o ciclo de vida de **Upskilling** e **Reskilling**, permitindo:
+1.  **Gestão de Trilhas:** Criação de roteiros de aprendizado focados em skills de 2030+.
+2.  **Gestão de Talentos:** Cadastro e acompanhamento de usuários em transição de carreira.
+3.  **Integração:** Arquitetura agnóstica pronta para conectar com front-ends web, mobile ou sistemas de RH.
 
-**Destaques da Solução:**
+---
 
-  * Alinhamento com ODS 4 (Educação de Qualidade) e 8 (Trabalho Decente).
-  * Arquitetura desacoplada e escalável.
-  * Controle de versionamento de API.
+## Deploy e Acesso (Produção)
 
------
+A API está publicada e operante no Microsoft Azure.
 
-## Tecnologias Utilizadas
+* **Swagger UI (Documentação Interativa):** [Acessar Swagger na Nuvem](https://api-koda-fiap-hehyffhvcdgvbxdf.brazilsouth-01.azurewebsites.net/swagger)
+* **Base URL:** `https://api-koda-fiap-hehyffhvcdgvbxdf.brazilsouth-01.azurewebsites.net`
 
-  * **Linguagem:** C\# (Platforma .NET 9)
-  * **Framework:** ASP.NET Core Web API
-  * **Banco de Dados:** Oracle Database
-  * **ORM:** Entity Framework Core 9.0
-  * **Documentação:** Swagger (Swashbuckle)
-  * **Versionamento:** Asp.Versioning.Mvc
-  * **Arquitetura:** Camadas (DDD Simplificado: Controller, Service, Repository)
+> **Nota sobre Acesso:** O ambiente de produção conecta-se automaticamente a uma instância Oracle Database na nuvem. As credenciais (Usuário/Senha) estão configuradas seguramente via **Azure Environment Variables** e não são necessárias para consumir a API pública.
 
------
+---
 
-## Configuração e Execução
+## Tecnologias e Versões
 
-### 1\. Pré-requisitos
+* **Linguagem:** C# (.NET 9.0)
+* **Framework:** ASP.NET Core Web API
+* **Banco de Dados:** Oracle Database (compatível com 11g/12c/19c/21c)
+* **ORM:** Entity Framework Core 9.0
+* **Documentação:** Swashbuckle (Swagger/OpenAPI)
+* **Versionamento:** Asp.Versioning.Mvc
 
-  * [.NET SDK 9.0](https://dotnet.microsoft.com/download) instalado.
-  * Acesso a um banco de dados Oracle (Local ou Cloud/FIAP).
-  * Visual Studio 2022 ou VS Code.
+---
 
-### 2\. Clonar e Restaurar Dependências
+## Guia de Instalação e Execução Local
 
-Abra o terminal na pasta raiz do projeto e execute:
+Siga estes passos para rodar o projeto na sua máquina.
+
+### 1. Pré-requisitos
+* [.NET SDK 9.0](https://dotnet.microsoft.com/download) instalado.
+* Acesso a um banco Oracle (Local ou Remoto).
+* Ferramenta de CLI do EF Core instalada globalmente:
+    ```bash
+    dotnet tool install --global dotnet-ef
+    ```
+
+### 2. Instalar Dependências
+Abra o terminal na raiz da solução (`SkillBridge.sln`) e restaure os pacotes:
 
 ```bash
-# Restaura os pacotes NuGet definidos no projeto
 dotnet restore
-```
+````
 
 ### 3\. Configurar o Banco de Dados
 
-Abra o arquivo `SkillBridge.Api/appsettings.json` e configure sua Connection String do Oracle:
+Abra o arquivo `SkillBridge.Api/appsettings.json`. Localize a seção `ConnectionStrings` e insira suas credenciais do Oracle:
 
 ```json
 "ConnectionStrings": {
-  "OracleConnection": "User Id=SEU_USUARIO;Password=SUA_SENHA;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.fiap.com.br)(PORT=1521))(CONNECT_DATA=(SID=ORCL)));"
+  "OracleConnection": "User Id=SEU_USUARIO;Password=SUA_SENHA;Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=SEU_HOST_ORACLE)(PORT=1521))(CONNECT_DATA=(SID=ORCL)));"
 }
 ```
 
 ### 4\. Rodar Migrações (Migrations)
 
-O projeto utiliza Entity Framework Core. Para criar a estrutura do banco (caso não tenha criado via script SQL), execute:
+Para criar as tabelas no banco de dados utilizando o Entity Framework Core:
 
 ```bash
-# Gera o histórico de migração (InitialCreate)
+# 1. Criar o arquivo de migração (Snapshot do código atual)
 dotnet ef migrations add InitialCreate --project SkillBridge.Infrastructure --startup-project SkillBridge.Api
 
-# Aplica as tabelas no banco de dados
+# 2. Aplicar a migração no banco (Cria as tabelas TB_USUARIO, TB_TRILHA, etc.)
 dotnet ef database update --project SkillBridge.Infrastructure --startup-project SkillBridge.Api
 ```
 
-*(Obs: Se você já rodou o script SQL manual fornecido, o comando `database update` pode ser pulado).*
-
 ### 5\. Executar a Aplicação
 
-Para subir a API:
+Inicie o servidor da API:
 
 ```bash
 dotnet run --project SkillBridge.Api
 ```
 
-A aplicação iniciará (geralmente em `http://localhost:5006` ou porta similar). O Swagger abrirá automaticamente se estiver em ambiente de desenvolvimento.
+A aplicação estará disponível em `http://localhost:5006` (ou porta indicada no terminal).
 
 -----
 
-## Documentação da API (Endpoints)
+## 🔌 Exemplos de Requisições (Endpoints)
 
-A API utiliza versionamento. A base da URL é: `/api/v1/`.
+A API utiliza versionamento na URL: `/api/v1/`.
 
-### 🛤️ Recurso: Trilhas (`/api/v1/trilhas`)
+### 1\. Criar Trilha (POST)
 
-  * **GET** `/api/v1/trilhas`
-      * Retorna todas as trilhas cadastradas.
-  * **GET** `/api/v1/trilhas/{id}`
-      * Retorna uma trilha específica.
-      * *Erro:* Retorna 404 com mensagem customizada se não encontrar.
-  * **POST** `/api/v1/trilhas`
-      * Cria uma nova trilha.
-      * **Payload JSON (Exemplo):**
-        ```json
-        {
-          "nome": "IA Generativa para Negócios",
-          "descricao": "Curso focado em LLMs e produtividade.",
-          "nivel": "INTERMEDIARIO",
-          "cargaHoraria": 40,
-          "focoPrincipal": "Tecnologia"
-        }
-        ```
-  * **PUT** `/api/v1/trilhas/{id}`
-      * Atualiza uma trilha existente.
-  * **DELETE** `/api/v1/trilhas/{id}`
-      * Remove uma trilha.
+**URL:** `/api/v1/trilhas`
+**Payload JSON:**
 
-### Recurso: Usuários (`/api/v1/usuarios`)
+```json
+{
+  "nome": "Liderança Ágil 4.0",
+  "descricao": "Desenvolvimento de soft skills para gestores.",
+  "nivel": "AVANCADO",
+  "cargaHoraria": 60,
+  "focoPrincipal": "Soft Skills"
+}
+```
 
-  * **GET** `/api/v1/usuarios`
-      * Lista todos os usuários.
-  * **POST** `/api/v1/usuarios`
-      * Cadastra um usuário.
-      * *Validação:* Não permite e-mails duplicados.
-      * **Payload JSON (Exemplo):**
-        ```json
-        {
-          "nome": "Maria Silva",
-          "email": "maria.silva@email.com",
-          "areaAtuacao": "Marketing",
-          "nivelCarreira": "Pleno"
-        }
-        ```
+### 2\. Listar Trilhas (GET)
 
------
+**URL:** `/api/v1/trilhas`
+**Resposta Esperada (200 OK):**
 
-## Como Testar
+```json
+[
+  {
+    "id": 1,
+    "nome": "Liderança Ágil 4.0",
+    "nivel": "AVANCADO",
+    "cargaHoraria": 60
+    ...
+  }
+]
+```
 
-### Opção 1: Swagger (Recomendado)
+### 3\. Cadastrar Usuário (POST)
 
-Acesse a URL exibida no terminal após rodar o projeto (ex: `http://localhost:5006/swagger`).
+**URL:** `/api/v1/usuarios`
+**Payload JSON:**
 
-  * Interface visual onde você pode clicar em "Try it out" e testar todos os métodos.
-
-### Opção 2: Interface Web (Inclusa no projeto)
-
-Abra o arquivo `index.html` localizado na raiz (ou pasta específica) no seu navegador.
-
-  * Configure a variável `API_URL` dentro do arquivo HTML para apontar para a porta da sua API.
-
-### Opção 3: Ferramentas Externas (Postman/Insomnia)
-
-1.  Crie uma requisição do tipo `POST`.
-2.  URL: `http://localhost:5006/api/v1/trilhas`.
-3.  Body: Selecione `raw` e `JSON`.
-4.  Cole o payload de exemplo acima e envie.
+```json
+{
+  "nome": "João da Silva",
+  "email": "joao.silva@email.com",
+  "areaAtuacao": "Contabilidade",
+  "nivelCarreira": "Em transição"
+}
+```
 
 -----
 
-## Estrutura do Projeto (Arquitetura)
+## Como Testar Rapidamente
 
-O projeto segue uma arquitetura em camadas para garantir a separação de responsabilidades e fácil manutenção:
+### Opção A: Via Swagger (Interface Visual)
 
-  * **SkillBridge.Api:** [Controller] Camada de entrada. Contém os Controllers, configuração de Swagger, Injeção de Dependência e tratamento de versionamento.
-  * **SkillBridge.Application:** [Service] Contém as Regras de Negócio (ex: validação de duplicidade de e-mail) e Orquestração.
-  * **SkillBridge.Domain:** [Model] Camada mais interna. Contém as Entidades (`Trilha`, `Usuario`), Interfaces (`Repository`, `Service`) e Exceções Customizadas (`TrilhaNaoEncontradaException`).
-  * **SkillBridge.Infrastructure:** [Repository] Implementação do acesso a dados. Contém o `AppDbContext` (EF Core), Mapeamento das tabelas Oracle e Implementação dos Repositórios.
+1.  Acesse `http://localhost:5006/swagger` (local) ou o link do Deploy.
+2.  Clique no endpoint desejado (ex: POST /trilhas).
+3.  Clique em **Try it out**.
+4.  Cole o JSON de exemplo e clique em **Execute**.
+
+### Opção B: Via Interface Web (Index.html)
+
+Para facilitar a validação visual do Backend, mantivemos um arquivo `index.html` na raiz do projeto. Ele funciona como uma SPA (Single Page Application) simples para listar e cadastrar dados.
+
+1.  Abra o arquivo `index.html` no seu navegador.
+2.  Ele se conectará automaticamente à API para listar Trilhas e Usuários em uma interface amigável.
+      * *Nota:* Caso queira alternar entre a API Local e a de Produção, basta editar a variável `API_URL` dentro do script do arquivo HTML.
+
+### Opção C: Via cURL (Terminal)
+
+Para testar a listagem de trilhas rapidamente via linha de comando:
+
+```bash
+curl -X 'GET' \
+  '[https://api-koda-fiap-hehyffhvcdgvbxdf.brazilsouth-01.azurewebsites.net/api/v1/Trilhas](https://api-koda-fiap-hehyffhvcdgvbxdf.brazilsouth-01.azurewebsites.net/api/v1/Trilhas)' \
+  -H 'accept: text/plain'
+```
 
 -----
 
-## Integrantes do Grupo
+## Arquitetura e Organização do Código
 
-  * Márcio Gastaldi - RM98811
-  * Arthur Bessa Pian - RM99215
-  * Davi Desenzi - RM550849
+O projeto segue os princípios de **Clean Architecture** e **DDD (Domain-Driven Design)** simplificado, visando legibilidade e facilidade de manutenção:
+
+  * **SkillBridge.Api:** Camada de **Interface**. Contém os `Controllers`, configuração de Injeção de Dependência (`Program.cs`) e documentação Swagger.
+  * **SkillBridge.Application:** Camada de **Serviço**. Contém a lógica de negócios (`Services`), validações (ex: impedir e-mail duplicado) e orquestração.
+  * **SkillBridge.Domain:** Camada de **Domínio**. Contém as Entidades (`Models`), Interfaces (`IRepository`) e Exceções Customizadas. É o núcleo do projeto, sem dependências externas.
+  * **SkillBridge.Infrastructure:** Camada de **Infraestrutura**. Implementa o acesso a dados (`Repositories`), configuração do Entity Framework (`AppDbContext`) e mapeamento do Oracle.
+
+-----
+
+## Integrantes
+
+  * **Márcio Gastaldi** - RM98811
+  * **Arthur Bessa Pian** - RM99215
+  * **Davi Desenzi** - RM550849
+
+
