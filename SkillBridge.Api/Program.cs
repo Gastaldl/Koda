@@ -68,11 +68,8 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // 4. Pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("AllowAll");
 
